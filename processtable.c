@@ -85,5 +85,5 @@ void print_table(struct Process table)
 	}
 	average_wait = average_wait / i;
 	average_turn_around = average_turn_around / i;
-	printf("Average wait: %f Average turnaround: %f",average_wait, average_turn_around)
+	printf("Average wait: %f Average turnaround: %f",average_wait, average_turn_around);
 }
