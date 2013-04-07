@@ -11,6 +11,7 @@ ssize_t input;
 
 void main()
 {
+    struct ProcessTable pTable;
 	char streamInput[MAX_LINES];
 	int values[LENGTH];
 	int i = 0;
@@ -25,6 +26,7 @@ void main()
 			printf("%s\n", splitVals);
 			splitVals = strtok(input, " \t\n");			
 		}
+		printf("returning to stream");
 		i++;
 	}
 	
@@ -33,5 +35,3 @@ void main()
 	// do shortest remaining job
 	// do round robin
 }
-
-//int[] getInput( FILE* inputFile)
