@@ -15,7 +15,7 @@ void main()
 	int values[LENGTH];
 	int i = 0;
 	// get stdinput
-	while(fgets(streamInput, 256, stdin) != null)
+	while(fgets(streamInput, 256, stdin) != NULL)
 	{
 		// fill arrays
 		char* splitVals;
