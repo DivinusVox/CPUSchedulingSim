@@ -19,11 +19,11 @@ void main()
 	{
 		// fill arrays
 		char* splitVals;
-		splitVals = strtok(streamInput, " \t");
+		splitVals = strtok(streamInput, " \t\n");
 		while(splitVals != NULL)
 		{
 			printf("%s\n", splitVals);
-			splitVals = strtok(input, " \t");			
+			splitVals = strtok(input, " \t\n");			
 		}
 		i++;
 	}
