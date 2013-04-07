@@ -10,7 +10,7 @@ ssize_t input;
 
 void main()
 {
-	int[3*LENGTH] values;
+	int values[3*LENGTH];
 	int i = 0;
 	// get stdinput
 	while((input = read(STDIN_FILENO, buf, sizeof buf)) > 0)
