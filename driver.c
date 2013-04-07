@@ -4,21 +4,22 @@
 #include <string.h>
 #include <sys/types.h>
 
-#define LENGTH = 300
+#define LENGTH 300
+#define MAX_LINES 100
 
 ssize_t input;
 
 void main()
 {
-	char buffer[256];
+	char streamInput[MAX_LINES];
 	int values[LENGTH];
 	int i = 0;
 	// get stdinput
-	while((input = read(STDIN_FILENO, buffer, sizeof buffer)) > 0)
+	while(fgets(streamInput, 256, stdin) != null)
 	{
 		// fill arrays
 		char* splitVals;
-		splitVals = strtok(input, " \t");
+		splitVals = strtok(streamInput, " \t");
 		while(splitVals != NULL)
 		{
 			printf("%s\n", splitVals);
