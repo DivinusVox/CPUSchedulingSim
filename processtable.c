@@ -6,8 +6,8 @@ struct ProcessTable
 	int wait_time[TABLESIZE];
 	int time_completed[TABLESIZE];
 	int remaining_cycles[TABLESIZE];
-	int time[TABLESIZE];
-}
+	int time;
+};
 
 /* Do work by pid
  * Purpose does work on a function by pid.
@@ -35,7 +35,7 @@ int do_work_pid(struct ProcessTable table, int work_pid, int cycles)
 	if (pid_index == -1)	// pid was not found return with error.
 		return pid_index; 
 	
-	return do_work_index(table, index, cycles);
+	return do_work_index(table, pid_index, cycles);
 	
 }
 
@@ -53,7 +53,7 @@ int do_work_pid(struct ProcessTable table, int work_pid, int cycles)
  */
 int do_work_index(struct ProcessTable table, int index, int cycles)
 {
-	int rounds_worked = 0;
+	int i = 0;
 	for(i = 0; (i < cycles) && (table.remaining_cycles[index] > 0); i++)
 	{
 		rounds_worked++;
@@ -61,8 +61,16 @@ int do_work_index(struct ProcessTable table, int index, int cycles)
 		table.remaining_cycles[index]--;
 		if (table.remaining_cycles[index] == 0)
 		{
-			table.time_completed[index] = table.time[index];
+			table.time_completed[index] = table.time++;
+			break
 		}
 	}
-	return rounds_worked;
+	return i;
+}
+
+void print_table(struct Process table)
+{
+	printf("%5s%8s%12s\n", "Pid","Wait","Turnaround");
+	printf("%5s%8s%12s\n", "---","----","----------");
+	for
 }
