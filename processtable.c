@@ -70,7 +70,20 @@ int do_work_index(struct ProcessTable table, int index, int cycles)
 
 void print_table(struct Process table)
 {
+	int i;
+	float average_wait = 0;
+	float average_turn_around = 0;
 	printf("%5s%8s%12s\n", "Pid","Wait","Turnaround");
 	printf("%5s%8s%12s\n", "---","----","----------");
-	for
+	for(i = 0; i < TABLESIZE; i++)
+	{
+		int turn_around = table.time_completed[i] - table.arrival_time;
+		int wait = table.base_cycles[i];
+		printf("%5d%8d%12d\n",table.pid, wait, turn_around);
+		average_wait += wait;
+		average_turn_around += turn_around;
+	}
+	average_wait = average_wait / i;
+	average_turn_around = average_turn_around / i;
+	printf("Average wait: %f Average turnaround: %f",average_wait, average_turn_around)
 }
