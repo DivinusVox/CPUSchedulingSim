@@ -5,5 +5,11 @@
 
 void main()
 {
-    
+	// get stdinput
+	// fill arrays
+	
+	// do fcfs
+	// do shortest job
+	// do shortest remaining job
+	// do round robin
 }
