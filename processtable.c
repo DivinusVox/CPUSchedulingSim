@@ -1,5 +1,5 @@
 #define	TABLESIZE	100
-struct ProcessTable
+typedef struct ProcessTable
 {
 	int pid[TABLESIZE];
 	int arrival_time[TABLESIZE];
