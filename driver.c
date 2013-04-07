@@ -4,14 +4,14 @@
 #include <string.h>
 #include <sys/types.h>
 
-#define LENGTH = 100
+#define LENGTH = 300
 
 ssize_t input;
 
 void main()
 {
 	char buffer[256];
-	int values[3*LENGTH];
+	int values[LENGTH];
 	int i = 0;
 	// get stdinput
 	while((input = read(STDIN_FILENO, buffer, sizeof buffer)) > 0)
