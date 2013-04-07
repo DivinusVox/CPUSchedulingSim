@@ -10,10 +10,11 @@ ssize_t input;
 
 void main()
 {
+	char buffer[256];
 	int values[3*LENGTH];
 	int i = 0;
 	// get stdinput
-	while((input = read(STDIN_FILENO, buf, sizeof buf)) > 0)
+	while((input = read(STDIN_FILENO, buffer, sizeof buffer)) > 0)
 	{
 		// fill arrays
 		char* splitVals;
@@ -32,4 +33,4 @@ void main()
 	// do round robin
 }
 
-int[] getInput( FILE* inputFile)
+//int[] getInput( FILE* inputFile)
