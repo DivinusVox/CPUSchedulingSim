@@ -22,9 +22,11 @@ void main()
 		char* splitVals;
 		splitVals = strtok(streamInput, " \t\n");
 		while (splitVals != NULL)
+		{
 			printf("%s\n", splitVals);
-		//pTable.pid[i] = splitVals;	
-		//splitVals = strtok(streamInput, " \t\n");
+			splitVals = strtok(streamInput, " \t\n");
+		//pTable.pid[i] = splitVals;
+		}	
 		
 		printf("returning to stream\n");
 		i++;
