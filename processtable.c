@@ -35,11 +35,34 @@ int do_work_pid(struct ProcessTable table, int work_pid, int cycles)
 	if (pid_index == -1)	// pid was not found return with error.
 		return pid_index; 
 	
-
-	for(i = 0; (i < cycles) && (table.remaining_cycles > 0); i++)
-	{
-		time++;
-		
-	}
+	return do_work_index(table, index, cycles);
+	
 }
-int do_work_index
+
+/* Do work by index
+ * Purpose does work on a function by pid.
+ * Arguments required: 
+ *						- table: a table with some indexes
+ *						- index: the index of the variables to do work on
+ *						- cycles: The number of cycles of work to do. 
+ *									pass -1 to go until done.
+ * Return values: 
+ *						- 0 if there is no work to be done on a job.
+ *						- Otherwise a positive interger with the number of rounds
+ *							actually worked.
+ */
+int do_work_index(struct ProcessTable table, int index, int cycles)
+{
+	int rounds_worked = 0;
+	for(i = 0; (i < cycles) && (table.remaining_cycles[index] > 0); i++)
+	{
+		rounds_worked++;
+		table.time++;
+		table.remaining_cycles[index]--;
+		if (table.remaining_cycles[index] == 0)
+		{
+			table.time_completed[index] = table.time[index];
+		}
+	}
+	return rounds_worked;
+}
