@@ -24,7 +24,7 @@ void main()
 		while (splitVals != NULL)
 		{
 			printf("%s\n", splitVals);
-			splitVals = strtok(streamInput, " \t\n");
+			splitVals = strtok(input, " \t\n");
 		//pTable.pid[i] = splitVals;
 		}	
 		
