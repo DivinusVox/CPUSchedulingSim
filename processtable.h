@@ -82,7 +82,7 @@ void print_table(ProcessTable table)
 	float average_turn_around = 0;
 	printf("%5s%8s%12s\n", "Pid","Wait","Turnaround");
 	printf("%5s%8s%12s\n", "---","----","----------");
-	for(i = 0; i < TABLESIZE; i++)
+	for(i = 0; i < table.size; i++)
 	{
 		int turn_around = table.time_completed[i] - table.arrival_time[i];
 		int wait = table.base_cycles[i];
