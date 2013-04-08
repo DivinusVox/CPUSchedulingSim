@@ -124,16 +124,16 @@ void PrintTable(ProcessTable table)
 	for(i = 0; i < table.size; i++)
 	{
 		float turn_around = table.timeCompleted[i] - table.arrival[i];
-		printf("%5d%8.1f%12.1f",table.pid[i], table.wait[i], turn_around);
+		printf("%5d%8g%12g",table.pid[i], table.wait[i], turn_around);
 		if (DEBUGMODE != 0)
-			printf("%8.1f%10.1f", table.arrival[i],table.timeCompleted[i]);
+			printf("%8g%10g", table.arrival[i],table.timeCompleted[i]);
 		printf("\n");
 		average_wait += table.wait[i];
 		average_turn_around += turn_around;
 	}
 	average_wait = average_wait / i;
 	average_turn_around = average_turn_around / i;
-	printf("Average wait: %f Average turnaround: %f\n\n", average_wait, average_turn_around);
+	printf("Average wait: %-7g Average turnaround: %-7g\n\n", average_wait, average_turn_around);
 }
 /* Find Shortest Index
  * Purpose: find the index of the smallest element of a member of an array that is currently in the queue.
@@ -165,10 +165,8 @@ int FindSoonestIndex(ProcessTable table, float start)
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
-		if (DEBUGMODE > 1) printf("%f >= %f >= %f\n", table.time, table.arrival[i], start);
 		if (table.time >= table.arrival[i] && (table.arrival[i] > start)) //Test that entry exists
 		{
-			if (DEBUGMODE != 0) printf("Find soonest index considering:%d\n", i);
 			// Test that it is shorter than the current canidate and not done
 			if ((current_canidate == -1) || (table.arrival[current_canidate] > table.arrival[i]))
 				current_canidate = i;
