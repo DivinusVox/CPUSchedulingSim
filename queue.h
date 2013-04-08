@@ -26,7 +26,7 @@ int PopFront(struct Queue* Q)
 		struct Node* temp = Q->head;
 		Q->head = Q->head->next;
 		Q->size -= 1;
-		if (Q->size = 0)
+		if (Q->size == 0)
 		{
 			Q->head = NULL;
 			Q->tail = NULL;

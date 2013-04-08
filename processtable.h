@@ -1,5 +1,5 @@
 #define	TABLESIZE	100
-#define DEBUGMODE	1
+#define DEBUGMODE	0
 typedef struct
 {
 	int pid[TABLESIZE];
@@ -55,6 +55,7 @@ int do_work_pid(ProcessTable* table, int work_pid, int cycles)
  */
 int do_work_index(ProcessTable* table, int index, int cycles)
 {
+	if (DEBUGMODE != 0) printf("Working on pid: %d. %d time remaining.\n", table->pid[index], table->remaining_cycles[index]);
 	int i = 0;
 	if(table->wait_time[index] == -1)
 		table->wait_time[index] = table->time - table->arrival_time[index];
@@ -94,9 +95,9 @@ void print_table(ProcessTable table)
 	for(i = 0; i < table.size; i++)
 	{
 		float turn_around = table.time_completed[i] - table.arrival_time[i];
-		printf("%5d%8.2f%12.2f",table.pid[i], table.wait_time[i], turn_around);
+		printf("%5d%8.1f%12.1f",table.pid[i], table.wait_time[i], turn_around);
 		if (DEBUGMODE != 0)
-			printf("%8.2f%10.2f", table.arrival_time[i],table.time_completed[i]);
+			printf("%8.1f%10.1f", table.arrival_time[i],table.time_completed[i]);
 		printf("\n");
 		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
@@ -119,7 +120,7 @@ int find_shortest_index(ProcessTable table)
 			// Test that it is shorter than the current canidate and not done
 			if ((current_canidate == -1) || (table.remaining_cycles[current_canidate] > table.remaining_cycles[i]))
 				current_canidate = i;
-		}		
+		}
 	}
 	
 	return current_canidate;
@@ -135,12 +136,15 @@ int find_soonest_index(ProcessTable table, float start)
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
+		if (DEBUGMODE > 1) printf("%f >= %f >= %f\n", table.time, table.arrival_time[i], start);
 		if (table.time >= table.arrival_time[i] && (table.arrival_time[i] > start)) //Test that entry exists
 		{
+			if (DEBUGMODE != 0) printf("Find soonest index considering:%d\n", i);
 			// Test that it is shorter than the current canidate and not done
 			if ((current_canidate == -1) || (table.arrival_time[current_canidate] > table.arrival_time[i]))
 				current_canidate = i;
 		}		
 	}	
+	//if (DEBUGMODE != 0) printf("\n");
 	return current_canidate;
 }
