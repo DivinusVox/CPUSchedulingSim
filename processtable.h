@@ -55,6 +55,8 @@ int do_work_pid(ProcessTable table, int work_pid, int cycles)
 int do_work_index(ProcessTable table, int index, int cycles)
 {
 	int i = 0;
+	if (cycles == -1)
+		cycles = table.remaining_cycles[index];
 	for(i = 0; (i < cycles) && (table.remaining_cycles[index] > 0); i++)
 	{
 		table.time++;
