@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
+#include "processtable.h"
 
 #define LENGTH 300
 #define MAX_LINES 100
