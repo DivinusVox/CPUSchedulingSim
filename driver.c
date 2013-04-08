@@ -26,10 +26,15 @@ void main()
 		{
 			splitVals2 = strtok(NULL, " \t\n");
 			splitVals3 = strtok(NULL, " \t\n");
-			pTable.pid[i] = atoi(splitVals1);
+			int a = atoi(splitVals1);
+			int b = atoi(splitVals2);
+			int c = atoi(splitVals3);
+			/*pTable.pid[i] = atoi(splitVals1);
 			pTable.arrival_time[i] = atoi(splitVals2);
 			pTable.base_cycles[i] = atoi(splitVals3);
-			pTable.remaining_cycles[i] = atoi(splitVals3);
+			pTable.remaining_cycles[i] = atoi(splitVals3);*/
+			
+			printf("%d, %d, %d\n", a, b, c);
 		}	
 		
 		
