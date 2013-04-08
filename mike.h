@@ -5,12 +5,16 @@
 void ShortestJob(ProcessTable input)
 {
 	printf("Shortest Job First\n");
-
-	while(MoreToDo(input) > 0)
+	int i;
+	while((MoreToDo(input) > 0))
 	{
 		int this_index;
-		if ((this_index = find_shortest_index(input)) != -1)
+		this_index = find_shortest_index(input);
+		
+		if (this_index != -1)
 			do_work_index(&input, this_index, -1);
+		else
+			input.time += 1;
 	}
 	
 	print_table(input);
