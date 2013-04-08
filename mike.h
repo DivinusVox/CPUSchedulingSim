@@ -23,7 +23,7 @@ void ShortestJob(ProcessTable input)
 			}				
 		}
 		if (current_canidate != 1)
-			do_work_index(input, current_canidate, -1);
+			do_work_index(&input, current_canidate, -1);
 	}
 	printf("Shortest Job First");
 	print_table(input);

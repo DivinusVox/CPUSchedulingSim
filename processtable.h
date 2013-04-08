@@ -29,9 +29,9 @@ int do_work_pid(ProcessTable* table, int work_pid, int cycles)
 	//find pid in table
 	int i;
 	int pid_index = -1;
-	for( i = 0; i < TABLESIZE; i++)
+	for( i = 0; i < table->size; i++)
 	{
-		if (table.pid[i] == work_pid)
+		if (table->pid[i] == work_pid)
 			pid_index = i;
 	}
 	if (pid_index == -1)	// pid was not found return with error.
@@ -57,14 +57,14 @@ int do_work_index(ProcessTable* table, int index, int cycles)
 {
 	int i = 0;
 	if (cycles == -1)
-		cycles = table.remaining_cycles[index];
-	for(i = 0; (i < cycles) && (table.remaining_cycles[index] > 0); i++)
+		cycles = table->remaining_cycles[index];
+	for(i = 0; (i < cycles) && (table->remaining_cycles[index] > 0); i++)
 	{
-		table.time++;
-		table.remaining_cycles[index]--;
-		if (table.remaining_cycles[index] == 0)
+		table->time++;
+		table->remaining_cycles[index]--;
+		if (table->remaining_cycles[index] == 0)
 		{
-			table.time_completed[index] = table.time++;
+			table->time_completed[index] = table->time++;
 			break;
 		}
 	}
