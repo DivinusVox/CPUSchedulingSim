@@ -24,7 +24,7 @@ typedef struct
  *						- Otherwise a positive interger with the number of rounds
  *							actually worked.
  */
-int do_work_pid(ProcessTable table, int work_pid, int cycles)
+int do_work_pid(ProcessTable* table, int work_pid, int cycles)
 {
 	//find pid in table
 	int i;
@@ -53,7 +53,7 @@ int do_work_pid(ProcessTable table, int work_pid, int cycles)
  *						- Otherwise a positive interger with the number of rounds
  *							actually worked.
  */
-int do_work_index(ProcessTable table, int index, int cycles)
+int do_work_index(ProcessTable* table, int index, int cycles)
 {
 	int i = 0;
 	if (cycles == -1)
@@ -92,5 +92,5 @@ void print_table(ProcessTable table)
 	}
 	average_wait = average_wait / i;
 	average_turn_around = average_turn_around / i;
-	printf("Average wait: %f Average turnaround: %f", average_wait, average_turn_around);
+	printf("Average wait: %f Average turnaround: %f\n\n", average_wait, average_turn_around);
 }
