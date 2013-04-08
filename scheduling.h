@@ -74,8 +74,9 @@ void RoundRobin(ProcessTable input, float contextSwitch)
 }
 
 // First Come First Serve
-// takes array of ints
-// 	consumed in threes
+// Simulates FCFS process scheduler
+// Takes a populated struct
+//    Consumes in order of structure's arrays
 
 void FirstCome(ProcessTable input)
 {
@@ -90,8 +91,8 @@ void FirstCome(ProcessTable input)
 }
 
 // Shortest Remaining Time
-// takes array of ints,
-// 	consumed in threes
+// Simulates Shortest Remaining Time process scheduler
+// Takes a populated struct
 void ShortestRemaining(ProcessTable input)
 {
 	printf("Shortest Remaining\n\n");

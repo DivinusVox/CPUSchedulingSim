@@ -1,6 +1,12 @@
 #include "processtable.h"
 #include "scheduling.h"
 
+
+// Project Entry Point
+// main
+// no parameters taken
+// expects input via STDIN (redirect or direct entry)
+//  input shall conform to 3 integers per line, spaced with whitespace
 void main()
 {
 	ProcessTable pTable;

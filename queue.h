@@ -14,7 +14,9 @@ struct Queue
 	int size;
 };
 
-
+/* InitQueue
+ * Purpose: Initialize structure with default values.
+ */
 void InitQueue(struct Queue* Q)
 {
 	Q->head = NULL;
@@ -22,6 +24,10 @@ void InitQueue(struct Queue* Q)
 	Q->size = 0;
 }
 
+/* PopFront
+ * Purpose: Remove first element of Queue.
+ * Returns: Int value contained by Queue or -1 on failure.
+ */
 int PopFront(struct Queue* Q)
 {
 	if (Q->head != NULL)
@@ -39,6 +45,10 @@ int PopFront(struct Queue* Q)
 	return -1;
 }
 
+/* PushBack
+ * Purpose: Adds given value to a Node in the rear of the Queue.
+ * Parameters: Integer, positive.
+ */
 void PushBack(struct Queue* Q, int insert_me)
 {
 	struct Node* temp = (struct Node*) malloc(sizeof(struct Node));
