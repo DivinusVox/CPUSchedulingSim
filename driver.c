@@ -22,7 +22,7 @@ void main()
 		// fill arrays
 		char* splitVals1, splitVals2, splitVals3;
 		splitVals1 = strtok(streamInput, " \t\n");
-		while (splitVals1 != NULL)
+		if (splitVals1 != NULL)
 		{
 			//printf("%s\n", splitVals);
 			splitVals2 = strtok(NULL, " \t\n");
