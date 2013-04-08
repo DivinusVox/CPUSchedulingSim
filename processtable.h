@@ -8,6 +8,7 @@ typedef struct
 	int remaining_cycles[TABLESIZE];
 	int base_cycles[TABLESIZE];
 	int time;
+	int size;
 } ProcessTable;
 
 /* Do work by pid
@@ -91,5 +92,5 @@ void print_table(ProcessTable table)
 	}
 	average_wait = average_wait / i;
 	average_turn_around = average_turn_around / i;
-	printf("Average wait: %f Average turnaround: %f",average_wait, average_turn_around);
+	printf("Average wait: %f Average turnaround: %f", average_wait, average_turn_around);
 }

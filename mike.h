@@ -1,12 +1,12 @@
 // Shortest Job First
 
-void ShortestJob()
+void ShortestJob(ProcessTable input)
 {
 }
 
 
 // Round Robin
 
-void RoundRobin()
+void RoundRobin(ProcessTable input)
 {
 }

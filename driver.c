@@ -57,5 +57,5 @@ void main()
 	// do shortest remaining job
 	ShortestRemaining(pTable);
 	// do round robin
-	RoundRobine(pTable);
+	RoundRobin(pTable);
 }
