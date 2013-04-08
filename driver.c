@@ -20,7 +20,7 @@ void main()
 	while(fgets(streamInput, 256, stdin) != NULL)
 	{
 		// fill arrays
-		char* splitVals;
+		char* splitVals1, splitVals2, splitVals3;
 		splitVals1 = strtok(streamInput, " \t\n");
 		while (splitVals != NULL)
 		{
