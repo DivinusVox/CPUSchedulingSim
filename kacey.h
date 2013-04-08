@@ -1,4 +1,4 @@
-//#include <stdio.h>
+#include <stdio.h>
 //#include "processtable.h"
 
 // First Come First Serve
@@ -28,7 +28,6 @@ int MoreToDo(ProcessTable input)
 	{
 		if (input.remaining_cycles[i] > 0)
 			remaining++;
-		//printf("%d\n",input.remaining_cycles[i]);
 	}
 	
 	return remaining;
@@ -41,9 +40,6 @@ void ShortestRemaining(ProcessTable input)
 {
 	printf("Shortest Remaining\n\n");
 
-	//printf("Huh? %d\n", MoreToDo(input));
-	
-	//printf("Short =>%d\n", find_shortest_index(input));
 	// Find shortest current job
 	// run for 1 cycle
 	// loop
@@ -51,15 +47,15 @@ void ShortestRemaining(ProcessTable input)
 
 	while ((x = MoreToDo(input)) > 0)
 	{
-		printf("%d IMPLIES X AND STUFF! NOTICE ME!\n", x);
-		//printf("More to do stuffs, yeah?");
 		int shortest = find_shortest_index(input);
 		if (shortest != -1)
-			do_work_index(&input, 2, 1);
-			do_work_index(&input, 1, 1);
+			do_work_index(&input, shortest, 1);
 		else
 			input.time += 1.0;
+		getchar();
 	}
+
+	print_table(input);
 }
 
 
