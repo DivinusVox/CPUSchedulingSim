@@ -11,7 +11,7 @@ ssize_t input;
 
 void main()
 {
-    //struct ProcessTable pTable;
+    struct ProcessTable pTable;
 	char streamInput[MAX_LINES];
 	int values[LENGTH];
 	int i = 0;
@@ -20,11 +20,12 @@ void main()
 	{
 		// fill arrays
 		char* splitVals;
-		splitVals = strtok(streamInput, " \t\n");
+		splitVals1 = strtok(streamInput, " \t\n");
 		while (splitVals != NULL)
 		{
-			printf("%s\n", splitVals);
-			splitVals = strtok(" \t\n");
+			//printf("%s\n", splitVals);
+			splitVals2 = strtok(NULL, " \t\n");
+			splitVals3 = strtok(NULL, " \t\n");
 		//pTable.pid[i] = splitVals;
 		}	
 		
