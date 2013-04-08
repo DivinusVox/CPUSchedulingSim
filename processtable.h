@@ -1,5 +1,11 @@
+#include <stdio.h>
+#include <string.h>
+
 #define	TABLESIZE	100
 #define DEBUGMODE	0
+#define LENGTH 300
+#define MAX_LINES 100
+
 typedef struct
 {
 	int pid[TABLESIZE];
@@ -10,6 +16,59 @@ typedef struct
 	float time;
 	int size;
 } ProcessTable;
+
+/* initialize table
+ * Purpose: initialized import values in the table.
+ * Pre: stdin is populated with set of three variables.
+ * Post: table is properly initialized
+ */
+void initializeTable(ProcessTable* pTable)
+{
+	char streamInput[MAX_LINES];
+	int values[LENGTH];
+	int i = 0;
+	// get stdinput
+	while(fgets(streamInput, 256, stdin) != NULL)
+	{
+		// fill arrays
+		char* splitVals1;
+                char* splitVals2; 
+		char* splitVals3;
+		splitVals1 = strtok(streamInput, " \t\n");
+		if (splitVals1 != NULL)
+		{
+			splitVals2 = strtok(NULL, " \t\n");
+			splitVals3 = strtok(NULL, " \t\n");
+			
+			pTable->pid[i] = atoi(splitVals1);
+			pTable->arrival_time[i] = atoi(splitVals2);
+			pTable->remaining_cycles[i] = atoi(splitVals3);
+			pTable->wait_time[i] = -1;
+		}	
+		i++;
+	}
+	pTable->size = i;
+	pTable->time = 0;
+	
+}
+
+/* More to do
+ * Purpose: Interates through the process table's remaining cycles
+ * and returns the number of expected remaining cycles.
+ * Pre: input.remaining_cycles set for all in size range
+ */
+int MoreToDo(ProcessTable input)
+{
+	int remaining = 0;
+	int i;
+	for (i=0; i<input.size; i++)
+	{
+		if (input.remaining_cycles[i] > 0)
+			remaining++;
+	}
+	
+	return remaining;
+}
 
 /* Do work by pid
  * Purpose does work on a function by pid.

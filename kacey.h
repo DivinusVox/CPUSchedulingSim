@@ -17,22 +17,6 @@ void FirstCome(ProcessTable input)
 	print_table(input);
 }
 
-
-// MoreTODO
-//
-int MoreToDo(ProcessTable input)
-{
-	int remaining = 0;
-	int i;
-	for (i=0; i<input.size; i++)
-	{
-		if (input.remaining_cycles[i] > 0)
-			remaining++;
-	}
-	
-	return remaining;
-}
-
 // Shortest Remaining Time
 // takes array of ints,
 // 	consumed in threes
@@ -57,5 +41,3 @@ void ShortestRemaining(ProcessTable input)
 
 	print_table(input);
 }
-
-
