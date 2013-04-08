@@ -33,6 +33,6 @@ void ShortestJob(ProcessTable input)
 
 // Round Robin
 
-void RoundRobin(ProcessTable input)
+void RoundRobin(ProcessTable input, float contextSwitch)
 {
 }
