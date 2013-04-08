@@ -56,7 +56,7 @@ int do_work_pid(ProcessTable* table, int work_pid, int cycles)
 int do_work_index(ProcessTable* table, int index, int cycles)
 {
 	int i = 0;
-	if(table->wait_time[index] != -1)
+	if(table->wait_time[index] == -1)
 		table->wait_time[index] = table->time - table->arrival_time[index];
 	if (cycles == -1)
 		cycles = table->remaining_cycles[index];
@@ -82,13 +82,19 @@ void print_table(ProcessTable table)
 	int i;
 	float average_wait = 0;
 	float average_turn_around = 0;
-	printf("%5s%8s%12s\n", "Pid","Wait","Turnaround");
+	printf("%5s%8s%12s", "Pid","Wait","Turnaround");
+	if (DEBUGMODE != 0)
+		printf("%5s%8s", "entry","complete");
+	print("\n");
 	printf("%5s%8s%12s\n", "---","----","----------");
 	for(i = 0; i < table.size; i++)
 	{
 		//printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
 		int turn_around = table.time_completed[i] - table.arrival_time[i];
 		printf("%5d%8d%12d\n",table.pid[i], table.wait_time[i], turn_around);
+		if (DEBUGMODE != 0)
+			printf("%5d%8d", table.arrival_time[i],table.time_completed[i]);
+		print("\n");
 		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
 	}
