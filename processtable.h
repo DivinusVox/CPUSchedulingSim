@@ -9,10 +9,10 @@
 typedef struct
 {
 	int pid[TABLESIZE];
-	float arrival_time[TABLESIZE];
-	float wait_time[TABLESIZE];
-	float time_completed[TABLESIZE];
-	int remaining_cycles[TABLESIZE];
+	float arrival[TABLESIZE];
+	float wait[TABLESIZE];
+	float timeCompleted[TABLESIZE];
+	int remainingCycles[TABLESIZE];
 	float time;
 	int size;
 } ProcessTable;
@@ -41,9 +41,9 @@ void initializeTable(ProcessTable* pTable)
 			splitVals3 = strtok(NULL, " \t\n");
 			
 			pTable->pid[i] = atoi(splitVals1);
-			pTable->arrival_time[i] = atoi(splitVals2);
-			pTable->remaining_cycles[i] = atoi(splitVals3);
-			pTable->wait_time[i] = -1;
+			pTable->arrival[i] = atoi(splitVals2);
+			pTable->remainingCycles[i] = atoi(splitVals3);
+			pTable->wait[i] = -1;
 		}	
 		i++;
 	}
@@ -55,7 +55,7 @@ void initializeTable(ProcessTable* pTable)
 /* More to do
  * Purpose: Interates through the process table's remaining cycles
  * and returns the number of expected remaining cycles.
- * Pre: input.remaining_cycles set for all in size range
+ * Pre: input.remainingCycles set for all in size range
  */
 int MoreToDo(ProcessTable input)
 {
@@ -63,7 +63,7 @@ int MoreToDo(ProcessTable input)
 	int i;
 	for (i=0; i<input.size; i++)
 	{
-		if (input.remaining_cycles[i] > 0)
+		if (input.remainingCycles[i] > 0)
 			remaining++;
 	}
 	
@@ -73,30 +73,30 @@ int MoreToDo(ProcessTable input)
 /* Do work
  * Purpose does work on an element in the table
  * Arguments required: 
- *						- table: a table with some indexes
- *						- index: the index of the variables to do work on
- *						- cycles: The number of cycles of work to do. 
- *									pass -1 to go until done.
+ *		- table: a table with some indexes
+ *		- index: the index of the variables to do work on
+ *		- cycles: The number of cycles of work to do. 
+ *					pass -1 to go until done.
  * Return values: 
- *						- 0 if there is no work to be done on a job.
- *						- Otherwise a positive interger with the number of rounds
- *							actually worked.
+ *		- 0 if there is no work to be done on a job.
+ *		- Otherwise a positive interger with the number of rounds
+ *			actually worked.
  */
-int do_work(ProcessTable* table, int index, int cycles)
+int DoWork(ProcessTable* table, int index, int cycles)
 {
-	if (DEBUGMODE != 0) printf("Working on pid: %d. %d time remaining.\n", table->pid[index], table->remaining_cycles[index]);
+	if (DEBUGMODE != 0) printf("Working on pid: %d. %d time remaining.\n", table->pid[index], table->remainingCycles[index]);
 	int i = 0;
-	if(table->wait_time[index] == -1)
-		table->wait_time[index] = table->time - table->arrival_time[index];
+	if(table->wait[index] == -1)
+		table->wait[index] = table->time - table->arrival[index];
 	if (cycles == -1)
-		cycles = table->remaining_cycles[index];
-	for(i = 0; (i < cycles) && (table->remaining_cycles[index] > 0); i++)
+		cycles = table->remainingCycles[index];
+	for(i = 0; (i < cycles) && (table->remainingCycles[index] > 0); i++)
 	{
-		table->remaining_cycles[index] -= 1;
-		if (table->remaining_cycles[index] == 0)
+		table->remainingCycles[index] -= 1;
+		if (table->remainingCycles[index] == 0)
 		{
 			table->time += 1;
-			table->time_completed[index] = table->time;
+			table->timeCompleted[index] = table->time;
 			break;
 		}
 		table->time += 1;
@@ -106,9 +106,9 @@ int do_work(ProcessTable* table, int index, int cycles)
 /*	Print Table
  *	Purpose: Print out formatted results of a Process that has been run
  * 	Pre: An alorithmn has been run on the ProcessTable table so that
- *	the time_complteted and arrival_time are populated.
+ *	the time_complteted and arrival are populated.
  */
-void print_table(ProcessTable table)
+void PrintTable(ProcessTable table)
 {
 	int i;
 	float average_wait = 0;
@@ -123,12 +123,12 @@ void print_table(ProcessTable table)
 	printf("\n");
 	for(i = 0; i < table.size; i++)
 	{
-		float turn_around = table.time_completed[i] - table.arrival_time[i];
-		printf("%5d%8.1f%12.1f",table.pid[i], table.wait_time[i], turn_around);
+		float turn_around = table.timeCompleted[i] - table.arrival[i];
+		printf("%5d%8.1f%12.1f",table.pid[i], table.wait[i], turn_around);
 		if (DEBUGMODE != 0)
-			printf("%8.1f%10.1f", table.arrival_time[i],table.time_completed[i]);
+			printf("%8.1f%10.1f", table.arrival[i],table.timeCompleted[i]);
 		printf("\n");
-		average_wait += table.wait_time[i];
+		average_wait += table.wait[i];
 		average_turn_around += turn_around;
 	}
 	average_wait = average_wait / i;
@@ -138,16 +138,16 @@ void print_table(ProcessTable table)
 /* Find Shortest Index
  * Purpose: find the index of the smallest element of a member of an array that is currently in the queue.
  */
-int find_shortest_index(ProcessTable table)
+int FindShortestIndex(ProcessTable table)
 {
 	int current_canidate = -1;
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
-		if (table.time >= table.arrival_time[i] && (table.remaining_cycles[i] != 0)) //Test that entry exists
+		if (table.time >= table.arrival[i] && (table.remainingCycles[i] != 0)) //Test that entry exists
 		{
 			// Test that it is shorter than the current canidate and not done
-			if ((current_canidate == -1) || (table.remaining_cycles[current_canidate] > table.remaining_cycles[i]))
+			if ((current_canidate == -1) || (table.remainingCycles[current_canidate] > table.remainingCycles[i]))
 				current_canidate = i;
 		}
 	}
@@ -159,21 +159,20 @@ int find_shortest_index(ProcessTable table)
  * Purpose: find the index of the soonest element in the time range
  * between start and table.time.
  */
-int find_soonest_index(ProcessTable table, float start)
+int FindSoonestIndex(ProcessTable table, float start)
 {
 	int current_canidate = -1;
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
-		if (DEBUGMODE > 1) printf("%f >= %f >= %f\n", table.time, table.arrival_time[i], start);
-		if (table.time >= table.arrival_time[i] && (table.arrival_time[i] > start)) //Test that entry exists
+		if (DEBUGMODE > 1) printf("%f >= %f >= %f\n", table.time, table.arrival[i], start);
+		if (table.time >= table.arrival[i] && (table.arrival[i] > start)) //Test that entry exists
 		{
 			if (DEBUGMODE != 0) printf("Find soonest index considering:%d\n", i);
 			// Test that it is shorter than the current canidate and not done
-			if ((current_canidate == -1) || (table.arrival_time[current_canidate] > table.arrival_time[i]))
+			if ((current_canidate == -1) || (table.arrival[current_canidate] > table.arrival[i]))
 				current_canidate = i;
 		}		
-	}	
-	//if (DEBUGMODE != 0) printf("\n");
+	}
 	return current_canidate;
 }

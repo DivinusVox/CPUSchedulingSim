@@ -1,6 +1,5 @@
 #include "processtable.h"
-#include "kacey.h"
-#include "mike.h"
+#include "scheduling.h"
 
 void main()
 {

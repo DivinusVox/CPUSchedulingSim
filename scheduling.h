@@ -14,15 +14,15 @@ void ShortestJob(ProcessTable input)
 	int i;
 	while((MoreToDo(input) > 0))
 	{
-		int this_index; 
-		this_index = find_shortest_index(input);
+		int thisIndex; 
+		thisIndex = FindShortestIndex(input);
 		
-		if (this_index != INVALID)
-			do_work(&input, this_index, INVALID);
+		if (thisIndex != INVALID)
+			DoWork(&input, thisIndex, INVALID);
 		else
 			input.time += 1;
 	}
-	print_table(input);
+	PrintTable(input);
 }
 
 
@@ -43,18 +43,18 @@ void RoundRobin(ProcessTable input, float contextSwitch)
 		//sleep(1);
 	
 		// add anything to queue that needs to be added
-		int add_index;
-		while ((add_index = find_soonest_index(input, time_now)) != -1)
+		int addIndex;
+		while ((addIndex = FindSoonestIndex(input, time_now)) != -1)
 		{
-			PushBack(&q, add_index);
-			time_now = input.arrival_time[add_index] + TENTHOFMILLISECOND;
+			PushBack(&q, addIndex);
+			time_now = input.arrival[addIndex] + TENTHOFMILLISECOND;
 		}
 		time_now = input.time;
 		// Reattach head to end of queue and add context switch
 		if(head != INVALID)
 		{
 			
-			if(input.remaining_cycles[head] != 0)
+			if(input.remainingCycles[head] != 0)
 			{		
 				PushBack(&q, head);
 			}
@@ -63,14 +63,14 @@ void RoundRobin(ProcessTable input, float contextSwitch)
 		
 		if ((head = PopFront(&q)) != INVALID)
 		{
-			do_work(&input, head, WORKFOR);
+			DoWork(&input, head, WORKFOR);
 		}
 		else
 		{
 			input.time += TENTHOFMILLISECOND;
 		}		
 	}	
-	print_table(input);
+	PrintTable(input);
 }
 
 // First Come First Serve
@@ -82,11 +82,11 @@ void FirstCome(ProcessTable input)
 	int i;
 	for (i=0; i<input.size; i++)
 	{
-		do_work(&input, i, input.remaining_cycles[i]);
+		DoWork(&input, i, input.remainingCycles[i]);
 	}
 	
 	printf("First Come First Served:\n\n");
-	print_table(input);
+	PrintTable(input);
 }
 
 // Shortest Remaining Time
@@ -103,13 +103,13 @@ void ShortestRemaining(ProcessTable input)
 
 	while ((x = MoreToDo(input)) > 0)
 	{
-		int shortest = find_shortest_index(input);
+		int shortest = FindShortestIndex(input);
 		if (shortest != -1)
-			do_work(&input, shortest, 1);
+			DoWork(&input, shortest, 1);
 		else
 			input.time += 1.0;
 		getchar();
 	}
 
-	print_table(input);
+	PrintTable(input);
 }
