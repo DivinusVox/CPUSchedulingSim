@@ -63,4 +63,5 @@ void initializeTable(ProcessTable* pTable)
 	}
 	pTable->size = i;
 	pTable->time = 0;
+	
 }

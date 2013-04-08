@@ -114,13 +114,11 @@ int find_shortest_index(ProcessTable table)
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
-		if (table.time >= table.arrival_time[i]) //Test that entry exists
+		if (table.time >= table.arrival_time[i] && (table.remaining_cycles[i] != 0)) //Test that entry exists
 		{
 			// Test that it is shorter than the current canidate and not done
-			if (((current_canidate == -1) && (table.remaining_cycles[i] != 0)) || (current_canidate < table.remaining_cycles[i]))
-			{
+			if ((current_canidate == -1) || (table.remaining_cycles[current_canidate] > table.remaining_cycles[i]))
 				current_canidate = i;
-			}
 		}		
 	}
 	
