@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include "queue.h"
 
-
 #define WORKFOR				4
 #define INVALID				-1
-#define TENTHOFMILLISECOND	.1
+#define TENTHOFMILLISECOND	.1f
 
 // Shortest Job First
 // Purpose: Simulates a shortest job first disk schudule
@@ -35,31 +34,32 @@ void RoundRobin(ProcessTable input, float contextSwitch)
 	printf("Round Robin: Context Switch %1.1f\n", contextSwitch);
 	int i;
 	struct Queue q;
-	int head = -1;
+	InitQueue(&q);
+	int head;
 	while(MoreToDo(input) > 0) //Keep going until all work is done
 	{
+		printf("time: %f\n", input.time);
+		sleep(1);
 		float time_now = input.time;
-		if (q->head != NULL)
+		if ((head = PopFront(&q)) != INVALID)
 		{	
-			head = PopFront(q);
-			do_work_index(&input, i, WORKFOR);
+			do_work_index(&input, head, WORKFOR);
 		}
-		else// ELSE pass .1ms cycle
+		else
 		{
 			input.time += TENTHOFMILLISECOND;
-		}
-		
-		// REGARDLESS add anything to queue that needs to be added now that work is done
+		}		
+		// add anything to queue that needs to be added now that work is done
 		int add_index;
-		while ((add_index = find_soonest_index(Process, time_now)) != -1)
+		while ((add_index = find_soonest_index(input, time_now)) != -1)
 		{
-			PushBack(q, add_index);
-			time_now = input.arrival_time + TENTHOFMILLISECOND; //test for already inside somehow
+			PushBack(&q, add_index);
+			time_now = input.arrival_time[add_index] + TENTHOFMILLISECOND;
 		}			
 		// Reattach head to end of queue and context switch
 		if(head != INVALID)
 		{
-			PushBack(q, head);
+			PushBack(&q, head);
 			input.time += contextSwitch;
 		}
 	}	

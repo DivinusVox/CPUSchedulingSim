@@ -135,7 +135,7 @@ int find_soonest_index(ProcessTable table, float start)
 	int i;
 	for(i = 0; i < table.size; ++i)
 	{
-		if (table.time >= table.arrival_time[i] && (table.entry_time[i] > start)) //Test that entry exists
+		if (table.time >= table.arrival_time[i] && (table.arrival_time[i] > start)) //Test that entry exists
 		{
 			// Test that it is shorter than the current canidate and not done
 			if ((current_canidate == -1) || (table.arrival_time[current_canidate] > table.arrival_time[i]))
