@@ -3,11 +3,11 @@
 typedef struct
 {
 	int pid[TABLESIZE];
-	int arrival_time[TABLESIZE];
-	int wait_time[TABLESIZE];
-	int time_completed[TABLESIZE];
+	float arrival_time[TABLESIZE];
+	float wait_time[TABLESIZE];
+	float time_completed[TABLESIZE];
 	int remaining_cycles[TABLESIZE];
-	int time;
+	float time;
 	int size;
 } ProcessTable;
 
@@ -65,10 +65,11 @@ int do_work_index(ProcessTable* table, int index, int cycles)
 		table->remaining_cycles[index]--;
 		if (table->remaining_cycles[index] == 0)
 		{
-			table->time_completed[index] = table->time++;
+			table->time += 1;
+			table->time_completed[index] = table->time;
 			break;
 		}
-		table->time++;
+		table->time += 1;
 	}
 	return i;
 }
@@ -92,11 +93,10 @@ void print_table(ProcessTable table)
 	printf("\n");
 	for(i = 0; i < table.size; i++)
 	{
-		//printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
-		int turn_around = table.time_completed[i] - table.arrival_time[i];
-		printf("%5d%8d%12d",table.pid[i], table.wait_time[i], turn_around);
+		float turn_around = table.time_completed[i] - table.arrival_time[i];
+		printf("%5d%8.2f%12.2f",table.pid[i], table.wait_time[i], turn_around);
 		if (DEBUGMODE != 0)
-			printf("%8d%10d", table.arrival_time[i],table.time_completed[i]);
+			printf("%8.2f%10.2f", table.arrival_time[i],table.time_completed[i]);
 		printf("\n");
 		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
