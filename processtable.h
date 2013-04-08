@@ -84,6 +84,7 @@ void print_table(ProcessTable table)
 	printf("%5s%8s%12s\n", "---","----","----------");
 	for(i = 0; i < table.size; i++)
 	{
+		printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
 		int turn_around = table.time_completed[i] - table.arrival_time[i];
 		int wait = table.base_cycles[i];
 		printf("%5d%8d%12d\n",table.pid[i], wait, turn_around);

@@ -46,6 +46,7 @@ void main()
 		i++;
 	}
 	pTable.size = i;
+	pTable.time = 0;
 	
 	int j;
 	for (j=0; j<i; j++)
