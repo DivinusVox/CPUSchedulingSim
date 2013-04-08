@@ -1,4 +1,5 @@
 // Shortest Job First
+#include <stdio.h>
 #define LARGENUMBER 1000000000
 
 void ShortestJob(ProcessTable input)
@@ -23,9 +24,9 @@ void ShortestJob(ProcessTable input)
 		}
 		if (current_canidate != 1)
 			do_work_index(input, current_canidate, -1);
-			
-		print_table(input);
 	}
+	printf("Shortest Job First");
+	print_table(input);
 	
 }
 
