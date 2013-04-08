@@ -4,6 +4,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include "processtable.h"
+#include "kacey.h"
+#include "mike.h"
 
 #define LENGTH 300
 #define MAX_LINES 100
@@ -47,8 +49,13 @@ void main()
 	int j;
 	for (j=0; j<i; j++)
 		printf("PID: %d\n", pTable.pid[j]);
+	
 	// do fcfs
+	FirstCome(pTable);
 	// do shortest job
+	ShortestJob(pTable);
 	// do shortest remaining job
+	ShortestRemaining(pTable);
 	// do round robin
+	RoundRobine(pTable);
 }
