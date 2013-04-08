@@ -4,6 +4,11 @@
 
 void ShortestJob(ProcessTable input)
 {
+	while(MoreToDo(input))
+	{
+		do_work_index(&input, find_shortest_index(input), -1)
+	}
+	/*
 	int i, j;
 	for(i = 0; i < input.size; ++i) // Loop until all jobs are done
 	{
@@ -27,6 +32,7 @@ void ShortestJob(ProcessTable input)
 	}
 	printf("Shortest Job First\n");
 	print_table(input);
+	*/
 	
 }
 
@@ -35,4 +41,6 @@ void ShortestJob(ProcessTable input)
 
 void RoundRobin(ProcessTable input, float contextSwitch)
 {
+	printf("Round Robin: Context Switch %1.1f\n", contextSwitch);
+	print_table(input);
 }
