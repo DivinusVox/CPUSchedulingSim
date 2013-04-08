@@ -91,9 +91,9 @@ void print_table(ProcessTable table)
 	{
 		//printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
 		int turn_around = table.time_completed[i] - table.arrival_time[i];
-		printf("%5d%8d%12d\n",table.pid[i], table.wait_time[i], turn_around);
+		printf("%5d%8d%12d",table.pid[i], table.wait_time[i], turn_around);
 		if (DEBUGMODE != 0)
-			printf("%5d%8d", table.arrival_time[i],table.time_completed[i]);
+			printf("%8d%10d", table.arrival_time[i],table.time_completed[i]);
 		printf("\n");
 		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
