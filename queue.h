@@ -1,30 +1,57 @@
-typedef struct
+struct Node
 {
-  int value;
-  Node *next;
-} Node;
+	int value;
+	struct Node *next;
+};
 
-typedef struct
+struct Queue
 {
-  Node *head;
-  Node *tail;
-  int size;
-} Queue;
+	struct Node* head;
+	struct Node* tail;
+	int size;
+};
 
-int PopFront(Queue* Q)
+
+void InitQueue(struct Queue* Q)
 {
-  Node* temp = Q->head;
-  Q->Head = Q->next;
-  Q->size -= 1;
-  return temp->value;
+	Q->head = NULL;
+	Q->tail = NULL;
+	Q->size = 0;
 }
 
-void PushBack(Queue* Q, int insert_me)
+int PopFront(struct Queue* Q)
 {
-  Node* temp;
-  temp->value = insert_me;
-  temp->next = NULL;
-  Q->tail->next = temp;
-  Q->tail = temp;
-  Q->size += 1;
+	if (Q->head != NULL)
+	{
+		struct Node* temp = Q->head;
+		Q->head = Q->head->next;
+		Q->size -= 1;
+		if (Q->size = 0)
+		{
+			Q->head = NULL;
+			Q->tail = NULL;
+		}
+		return temp->value;
+	}
+	return -1;
+}
+
+void PushBack(struct Queue* Q, int insert_me)
+{
+	struct Node* temp = (struct Node*) malloc(sizeof(struct Node));
+	temp->value = insert_me;
+	temp->next = NULL;
+
+	if (Q->size == 0)
+	{
+		Q->head = temp;
+		Q->tail = temp;
+	}
+	else
+	{
+		Q->tail->next = temp;
+		Q->tail = temp;
+	}
+
+	Q->size += 1;
 }
