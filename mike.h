@@ -6,7 +6,7 @@ void ShortestJob(ProcessTable input)
 {
 	printf("Shortest Job First\n");
 
-	while(MoreToDo(input))
+	while(MoreToDo(input) > 0)
 	{
 		int this_index;
 		if ((this_index = find_shortest_index(input)) != -1)
