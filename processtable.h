@@ -67,7 +67,11 @@ int do_work_index(ProcessTable table, int index, int cycles)
 	}
 	return i;
 }
-
+/*	Print Table
+ *	Purpose: Print out formatted results of a Process that has been run
+ * 	Pre: An alorithmn has been run on the ProcessTable table so that
+ *	the time_complteted and arrival_time are populated.
+ */
 void print_table(ProcessTable table)
 {
 	int i;
