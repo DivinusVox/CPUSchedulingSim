@@ -3,7 +3,7 @@
 
 void ShortestJob(ProcessTable input)
 {
-	int i;
+	int i, j;
 	for(i = 0; i < input.size; ++i) // Loop until all jobs are done
 	{
 		int current_canidate = -1;
