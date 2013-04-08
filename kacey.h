@@ -7,9 +7,14 @@
 
 void FirstCome(ProcessTable input)
 {
-	printf("%d\n", input.pid[0]);
-	input.pid[0]=999;
-	printf("%d\n", input.pid[0]);
+	int i;
+	for (i=0; i<input.size; i++)
+	{
+		do_work_index(&input, i, -1);
+	}
+	
+	printf("First Come First Served:\n\n");
+	print_table(input);
 }
 
 
