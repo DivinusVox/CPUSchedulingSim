@@ -20,32 +20,33 @@ void main()
 	while(fgets(streamInput, 256, stdin) != NULL)
 	{
 		// fill arrays
-		char* splitVals1, splitVals2, splitVals3;
+		char* splitVals1;
+                char* splitVals2; 
+		char* splitVals3;
 		splitVals1 = strtok(streamInput, " \t\n");
 		if (splitVals1 != NULL)
 		{
 			splitVals2 = strtok(NULL, " \t\n");
 			splitVals3 = strtok(NULL, " \t\n");
+
+			//printf("%s", splitVals2);
 			
-			/*int a = atoi(splitVals1);
-			int b = atoi(splitVals2);
-			int c = atoi(splitVals3);*/
-			/*pTable.pid[i] = atoi(splitVals1);
+			pTable.pid[i] = atoi(splitVals1);
 			pTable.arrival_time[i] = atoi(splitVals2);
 			pTable.base_cycles[i] = atoi(splitVals3);
-			pTable.remaining_cycles[i] = atoi(splitVals3);*/
+			pTable.remaining_cycles[i] = atoi(splitVals3);
 			
-			printf("%s, %s, %s\n", splitVals1, splitVals2, splitVals3);
+			//printf("%d, %d, %d\n", a, b, c);
 		}	
 		
 		
-		printf("returning to stream\n");
+		//printf("returning to stream\n");
 		i++;
 	}
 	
 	int j;
 	for (j=0; j<i; j++)
-		printf("PID: %d", pTable.pid[j]);
+		printf("PID: %d\n", pTable.pid[j]);
 	// do fcfs
 	// do shortest job
 	// do shortest remaining job
