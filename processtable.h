@@ -1,4 +1,5 @@
 #define	TABLESIZE	100
+#define DEBUGMODE	1
 typedef struct
 {
 	int pid[TABLESIZE];
@@ -6,7 +7,6 @@ typedef struct
 	int wait_time[TABLESIZE];
 	int time_completed[TABLESIZE];
 	int remaining_cycles[TABLESIZE];
-	int base_cycles[TABLESIZE];
 	int time;
 	int size;
 } ProcessTable;
@@ -56,6 +56,8 @@ int do_work_pid(ProcessTable* table, int work_pid, int cycles)
 int do_work_index(ProcessTable* table, int index, int cycles)
 {
 	int i = 0;
+	if(table->wait_time[index] != -1)
+		table->wait_time[index] = table->time - table->arrival_time[index];
 	if (cycles == -1)
 		cycles = table->remaining_cycles[index];
 	for(i = 0; (i < cycles) && (table->remaining_cycles[index] > 0); i++)
@@ -86,9 +88,8 @@ void print_table(ProcessTable table)
 	{
 		//printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
 		int turn_around = table.time_completed[i] - table.arrival_time[i];
-		int wait = table.base_cycles[i];
-		printf("%5d%8d%12d\n",table.pid[i], wait, turn_around);
-		average_wait += wait;
+		printf("%5d%8d%12d\n",table.pid[i], table.wait_time[i], turn_around);
+		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
 	}
 	average_wait = average_wait / i;
