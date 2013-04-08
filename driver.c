@@ -11,7 +11,7 @@ ssize_t input;
 
 void main()
 {
-    struct ProcessTable pTable;
+    ProcessTable pTable;
 	char streamInput[MAX_LINES];
 	int values[LENGTH];
 	int i = 0;
