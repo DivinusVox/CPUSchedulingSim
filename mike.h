@@ -4,10 +4,16 @@
 
 void ShortestJob(ProcessTable input)
 {
+	printf("Shortest Job First\n");
+
 	while(MoreToDo(input))
 	{
-		do_work_index(&input, find_shortest_index(input), -1)
+		int this_index;
+		if ((this_index = find_shortest_index(input)) != -1)
+			do_work_index(&input, this_index, -1);
 	}
+	
+	print_table(input);
 	/*
 	int i, j;
 	for(i = 0; i < input.size; ++i) // Loop until all jobs are done
@@ -33,7 +39,6 @@ void ShortestJob(ProcessTable input)
 	printf("Shortest Job First\n");
 	print_table(input);
 	*/
-	
 }
 
 
