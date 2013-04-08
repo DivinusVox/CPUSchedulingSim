@@ -20,7 +20,7 @@ void main()
 	initializeTable(&pTable);
 	
 	int j;
-	for (j=0; j<i; j++)
+	for (j=0; j<pTable.size; j++)
 		printf("PID: %d\n", pTable.pid[j]);
 	
 	// do fcfs
