@@ -10,7 +10,7 @@ void FirstCome(ProcessTable input)
 	int i;
 	for (i=0; i<input.size; i++)
 	{
-		do_work_index(&input, i, input.remaining_cycles[i]);
+		do_work(&input, i, input.remaining_cycles[i]);
 	}
 	
 	printf("First Come First Served:\n\n");
@@ -33,7 +33,7 @@ void ShortestRemaining(ProcessTable input)
 	{
 		int shortest = find_shortest_index(input);
 		if (shortest != -1)
-			do_work_index(&input, shortest, 1);
+			do_work(&input, shortest, 1);
 		else
 			input.time += 1.0;
 		getchar();

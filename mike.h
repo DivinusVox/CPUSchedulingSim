@@ -18,7 +18,7 @@ void ShortestJob(ProcessTable input)
 		this_index = find_shortest_index(input);
 		
 		if (this_index != INVALID)
-			do_work_index(&input, this_index, INVALID);
+			do_work(&input, this_index, INVALID);
 		else
 			input.time += 1;
 	}
@@ -59,12 +59,11 @@ void RoundRobin(ProcessTable input, float contextSwitch)
 				PushBack(&q, head);
 			}
 			input.time += contextSwitch;
-		}
-		
+		}		
 		
 		if ((head = PopFront(&q)) != INVALID)
 		{
-			do_work_index(&input, head, WORKFOR);
+			do_work(&input, head, WORKFOR);
 		}
 		else
 		{

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define	TABLESIZE	100
 #define DEBUGMODE	0
+#define	TABLESIZE	100
 #define LENGTH 300
 #define MAX_LINES 100
 
@@ -70,38 +70,8 @@ int MoreToDo(ProcessTable input)
 	return remaining;
 }
 
-/* Do work by pid
- * Purpose does work on a function by pid.
- * Arguments required: 
- *						- table: a table with some indexes
- *						- work_pid: the pid of the job to do work on
- *						- cycles: The number of cycles of work to do. 
- *									pass -1 to go until done.
- * Return values: 
- *						- 0 if there is no work to be done on a job.
- *						- -1 for pid doesn't exist
- *						- Otherwise a positive interger with the number of rounds
- *							actually worked.
- */
-int do_work_pid(ProcessTable* table, int work_pid, int cycles)
-{
-	//find pid in table
-	int i;
-	int pid_index = -1;
-	for( i = 0; i < table->size; i++)
-	{
-		if (table->pid[i] == work_pid)
-			pid_index = i;
-	}
-	if (pid_index == -1)	// pid was not found return with error.
-		return pid_index; 
-	
-	return do_work_index(table, pid_index, cycles);
-	
-}
-
-/* Do work by index
- * Purpose does work on a function by pid.
+/* Do work
+ * Purpose does work on an element in the table
  * Arguments required: 
  *						- table: a table with some indexes
  *						- index: the index of the variables to do work on
@@ -112,7 +82,7 @@ int do_work_pid(ProcessTable* table, int work_pid, int cycles)
  *						- Otherwise a positive interger with the number of rounds
  *							actually worked.
  */
-int do_work_index(ProcessTable* table, int index, int cycles)
+int do_work(ProcessTable* table, int index, int cycles)
 {
 	if (DEBUGMODE != 0) printf("Working on pid: %d. %d time remaining.\n", table->pid[index], table->remaining_cycles[index]);
 	int i = 0;
