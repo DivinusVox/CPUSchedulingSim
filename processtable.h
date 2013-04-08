@@ -84,9 +84,12 @@ void print_table(ProcessTable table)
 	float average_turn_around = 0;
 	printf("%5s%8s%12s", "Pid","Wait","Turnaround");
 	if (DEBUGMODE != 0)
-		printf("%5s%8s", "entry","complete");
+		printf("%8s%10s", "entry","complete");
 	printf("\n");
-	printf("%5s%8s%12s\n", "---","----","----------");
+	printf("%5s%8s%12s", "---","----","----------");
+	if (DEBUGMODE != 0)
+		printf("%8s%10s", "-----","--------");
+	printf("\n");
 	for(i = 0; i < table.size; i++)
 	{
 		//printf("now: %d then: %d\n", table.time_completed[i], table.arrival_time[i]);
