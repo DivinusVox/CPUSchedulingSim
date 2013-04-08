@@ -124,5 +124,5 @@ int find_shortest_index(ProcessTable table)
 		}		
 	}
 	
-	return current_canidate = i;
+	return current_canidate;
 }
