@@ -85,7 +85,7 @@ void print_table(ProcessTable table)
 	printf("%5s%8s%12s", "Pid","Wait","Turnaround");
 	if (DEBUGMODE != 0)
 		printf("%5s%8s", "entry","complete");
-	print("\n");
+	printf("\n");
 	printf("%5s%8s%12s\n", "---","----","----------");
 	for(i = 0; i < table.size; i++)
 	{
@@ -94,7 +94,7 @@ void print_table(ProcessTable table)
 		printf("%5d%8d%12d\n",table.pid[i], table.wait_time[i], turn_around);
 		if (DEBUGMODE != 0)
 			printf("%5d%8d", table.arrival_time[i],table.time_completed[i]);
-		print("\n");
+		printf("\n");
 		average_wait += table.wait_time[i];
 		average_turn_around += turn_around;
 	}
