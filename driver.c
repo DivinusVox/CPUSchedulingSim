@@ -24,16 +24,22 @@ void main()
 		splitVals1 = strtok(streamInput, " \t\n");
 		if (splitVals1 != NULL)
 		{
-			//printf("%s\n", splitVals);
 			splitVals2 = strtok(NULL, " \t\n");
 			splitVals3 = strtok(NULL, " \t\n");
-		//pTable.pid[i] = splitVals;
+			pTable.pid[i] = atoi(splitVals1);
+			pTable.arrival_time[i] = atoi(splitVals2);
+			pTable.base_cycles[i] = atoi(splitVals3);
+			pTable.remaining_cycles[i] = atoi(splitVals3);
 		}	
+		
 		
 		printf("returning to stream\n");
 		i++;
 	}
 	
+	int j;
+	for (j=0; j<i; j++)
+		printf("PID: %d", pTable.pid[j]);
 	// do fcfs
 	// do shortest job
 	// do shortest remaining job
