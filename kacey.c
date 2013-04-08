@@ -2,16 +2,16 @@
 // takes array of ints
 // 	consumed in threes
 
-void FirstCome(int* input)
+void FirstCome(ProcessTable* input)
 {
-	
+	printf("%d\n", ProcessTable.pid[0]);
 }
 
 
 // Shortest Remaining Time
 // takes array of ints,
 // 	consumed in threes
-void ShortestRemaining(int* input)
+void ShortestRemaining(ProcessTable* input)
 {
 
 }
