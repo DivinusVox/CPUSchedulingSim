@@ -30,7 +30,8 @@ void main()
 	// do shortest remaining job
 	ShortestRemaining(pTable);
 	// do round robin
-	RoundRobin(pTable);
+	RoundRobin(pTable, 0);
+	RoundRobin(pTable, 0.4);
 }
 
 

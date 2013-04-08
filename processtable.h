@@ -105,3 +105,24 @@ void print_table(ProcessTable table)
 	average_turn_around = average_turn_around / i;
 	printf("Average wait: %f Average turnaround: %f\n\n", average_wait, average_turn_around);
 }
+/* Find Shortest Index
+ * Purpose: find the index of the smallest element of a member of an array that is currently in the queue.
+ */
+int find_shortest_index(ProcessTable table)
+{
+	int current_canidate = -1;
+	int i;
+	for(i = 0; i < table.size; ++i)
+	{
+		if (table.time >= table.arrival_time[i]) //Test that entry exists
+		{
+			// Test that it is shorter than the current canidate and not done
+			if (((current_canidate == -1) && (table.remaining_cycles[i] != 0)) || (current_canidate > table.remaining_cycles[i]))
+			{
+				current_canidate = i;
+			}
+		}		
+	}
+	
+	return current_canidate = i;
+}
