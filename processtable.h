@@ -62,7 +62,7 @@ int do_work_index(ProcessTable* table, int index, int cycles)
 		cycles = table->remaining_cycles[index];
 	for(i = 0; (i < cycles) && (table->remaining_cycles[index] > 0); i++)
 	{
-		table->remaining_cycles[index]--;
+		table->remaining_cycles[index] -= 1;
 		if (table->remaining_cycles[index] == 0)
 		{
 			table->time += 1;
@@ -85,7 +85,7 @@ void print_table(ProcessTable table)
 	float average_turn_around = 0;
 	printf("%5s%8s%12s", "Pid","Wait","Turnaround");
 	if (DEBUGMODE != 0)
-		printf("%8s%10s", "entry","complete");
+		printf("%8s%10s", "Entry","Complete");
 	printf("\n");
 	printf("%5s%8s%12s", "---","----","----------");
 	if (DEBUGMODE != 0)
