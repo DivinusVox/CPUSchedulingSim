@@ -45,6 +45,7 @@ void main()
 		//printf("returning to stream\n");
 		i++;
 	}
+	pTable.size = i;
 	
 	int j;
 	for (j=0; j<i; j++)
