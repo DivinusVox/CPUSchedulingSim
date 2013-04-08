@@ -124,3 +124,23 @@ int find_shortest_index(ProcessTable table)
 	
 	return current_canidate;
 }
+
+/* Find Shortest Index
+ * Purpose: find the index of the soonest element in the time range
+ * between start and table.time.
+ */
+int find_soonest_index(ProcessTable table, float start)
+{
+	int current_canidate = -1;
+	int i;
+	for(i = 0; i < table.size; ++i)
+	{
+		if (table.time >= table.arrival_time[i] && (table.entry_time[i] > start)) //Test that entry exists
+		{
+			// Test that it is shorter than the current canidate and not done
+			if ((current_canidate == -1) || (table.arrival_time[current_canidate] > table.arrival_time[i]))
+				current_canidate = i;
+		}		
+	}	
+	return current_canidate;
+}
